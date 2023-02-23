@@ -12,13 +12,13 @@ echo '%sudo ALL=(ALL) NOPASSWD:ALL'  >> /etc/sudoers
 # setup Xauthority
 gosu $USERNAME touch /home/$USERNAME/.Xauthority
 # setup vnc password
-gosu $USERNAME mkdir /home/$USERNAME/.vnc
+gosu $USERNAME mkdir -p /home/$USERNAME/.vnc
 gosu $USERNAME chmod 700 /home/$USERNAME/.vnc
 gosu $USERNAME touch /home/$USERNAME/.vnc/passwd
 gosu $USERNAME chmod 600 /home/$USERNAME/.vnc/passwd
 # setup wallpaper
 if [ -n "$WALLPAPERURL" ]; then
-    gosu $USERNAME bash -c "mkdir /home/$USERNAME/Templates \
+    gosu $USERNAME bash -c "mkdir -p /home/$USERNAME/Templates \
     && cd /home/$USERNAME/Templates \
     && curl -JLo wallpaper $WALLPAPERURL \
     && mkdir -p /home/$USERNAME/.config/pcmanfm/LXDE \
@@ -27,6 +27,5 @@ if [ -n "$WALLPAPERURL" ]; then
 fi
 
 # start vnc server
-gosu $USERNAME Xvfb $DISPLAY &
 gosu $USERNAME /opt/TurboVNC/bin/vncpasswd -f <<< $PASSWORD > /home/$USERNAME/.vnc/passwd
-gosu $USERNAME /opt/TurboVNC/bin/vncserver -fg -vgl -wm startlxde
+gosu $USERNAME /opt/TurboVNC/bin/vncserver :0 -fg -vgl -wm startlxde

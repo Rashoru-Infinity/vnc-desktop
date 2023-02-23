@@ -17,6 +17,7 @@ RUN apt-get update \
     libxv1 \
     libegl1-mesa \
     libglu1-mesa \
+    libgl1-mesa-dev \
     libxtst6 \
     libxkbfile1 \
     xkb-data \
@@ -25,13 +26,13 @@ RUN apt-get update \
     xauth \
     x11-xkb-utils \
     lxde \
-    xvfb \
     && curl -OL https://jaist.dl.sourceforge.net/project/virtualgl/3.0.2/virtualgl_3.0.2_amd64.deb \
     && curl -OL https://jaist.dl.sourceforge.net/project/turbovnc/3.0.2/turbovnc_3.0.2_amd64.deb \
     && dpkg -i ./virtualgl_3.0.2_amd64.deb \
     && dpkg -i ./turbovnc_3.0.2_amd64.deb \
     && vglserver_config +glx -s -f -t \
     && rm -rf *.deb \
+    /usr/bin/lxpolkit \
     /var/lib/apt/lists/* \
     /var/cache/apt/archives/*
 
