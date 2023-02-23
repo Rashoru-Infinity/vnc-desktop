@@ -26,10 +26,10 @@ RUN apt-get update \
     xauth \
     x11-xkb-utils \
     lxde \
-    && curl -OL https://jaist.dl.sourceforge.net/project/virtualgl/3.0.2/virtualgl_3.0.2_amd64.deb \
-    && curl -OL https://jaist.dl.sourceforge.net/project/turbovnc/3.0.2/turbovnc_3.0.2_amd64.deb \
-    && dpkg -i ./virtualgl_3.0.2_amd64.deb \
-    && dpkg -i ./turbovnc_3.0.2_amd64.deb \
+    && curl -OL https://jaist.dl.sourceforge.net/project/virtualgl/3.0.2/virtualgl_3.0.2_$(dpkg --print-architecture).deb \
+    && curl -OL https://jaist.dl.sourceforge.net/project/turbovnc/3.0.2/turbovnc_3.0.2_$(dpkg --print-architecture).deb \
+    && dpkg -i ./virtualgl_3.0.2_$(dpkg --print-architecture).deb \
+    && dpkg -i ./turbovnc_3.0.2_$(dpkg --print-architecture).deb \
     && vglserver_config +glx -s -f -t \
     && rm -rf *.deb \
     /usr/bin/lxpolkit \
